@@ -1,7 +1,7 @@
 import React, { createContext, useEffect, useState } from "react";
-import LayoutLeft from "./components/LayoutLeft";
 import { Route, Routes } from "react-router-dom";
 import Invoices from "./pages/Invoices";
+import MainLayout from "./layouts/MainLayout";
 export const ThemeContext = createContext(null);
 
 function App() {
@@ -18,11 +18,17 @@ function App() {
         }
     }, [theme]);
     return (
-        <div>
+        <div className="dark:bg-[#141625]">
             <ThemeContext.Provider value={{ theme, setTheme }}>
-                <LayoutLeft />
                 <Routes>
-                    <Route index element={<Invoices></Invoices>}></Route>
+                    <Route
+                        index
+                        element={
+                            <MainLayout>
+                                <Invoices></Invoices>
+                            </MainLayout>
+                        }
+                    ></Route>
                 </Routes>
             </ThemeContext.Provider>
         </div>
