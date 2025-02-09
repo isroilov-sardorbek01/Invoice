@@ -1,5 +1,5 @@
 import React, { createContext, useEffect, useState } from "react";
-import LayoutLeft from "./components/layoutLeft";
+import LayoutLeft from "./components/LayoutLeft";
 import { Route, Routes } from "react-router-dom";
 import Invoices from "./pages/Invoices";
 export const ThemeContext = createContext(null);
