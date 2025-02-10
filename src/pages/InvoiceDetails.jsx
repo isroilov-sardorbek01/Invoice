@@ -6,6 +6,8 @@ import arrowImg from "../images/arowImg.svg";
 function InvoiceDetails() {
     const { id } = useParams();
     const [voice, setVoice] = useState({});
+    const [dis, setDis] = useState(false);
+
     useEffect(() => {
         const value = data.find((prev) => prev.id === id);
         setVoice(value);
@@ -13,8 +15,11 @@ function InvoiceDetails() {
 
     console.log(voice);
 
+    function handleDel(id) {
+        setDis(true);
+    }
     return (
-        <div className="">
+        <div className="relative">
             <div className="mx-auto max-w-[730px] w-[100%]">
                 <div className="px-[24px]">
                     <NavLink
@@ -190,7 +195,12 @@ function InvoiceDetails() {
                     <button className="px-[23px] py-[17px] text-[12px] font-bold text-[#7E88C3] bg-[#F9FAFE] rounded-[26px] active:scale-90 transition-all dark:bg-[#252945] dark:text-[#DFE3FA]">
                         Edit
                     </button>
-                    <button className="px-[23px] py-[17px] text-[12px] font-bold text-white bg-[#EC5757] rounded-[26px] active:scale-90 transition-all">
+                    <button
+                        onClick={() => {
+                            handleDel(voice.id);
+                        }}
+                        className="px-[23px] py-[17px] text-[12px] font-bold text-white bg-[#EC5757] rounded-[26px] active:scale-90 transition-all"
+                    >
                         Delete
                     </button>
                     <button className="px-[27px] py-[17px] text-[12px] font-bold text-white bg-[#7C5DFA] rounded-[26px] active:scale-90 transition-all">
@@ -198,6 +208,32 @@ function InvoiceDetails() {
                     </button>
                 </div>
             </div>
+            {dis === true && (
+                <div className="fixed inset-0 flex items-center justify-center px-3 bg-black bg-opacity-50">
+                    <div className="max-w-[480px] w-full bg-white p-6 rounded-lg shadow-lg">
+                        <h1 className="mt-[48px] text-[#0C0E16] text-[24px] font-bold mb-[13px]">
+                            Confirm Deletion
+                        </h1>
+                        <p className="text-[12px] text-[#888EB0]">
+                            Are you sure you want to delete invoice #XM9141?
+                            This action cannot be undone.
+                        </p>
+                        <div className="flex justify-end gap-2 mt-[16px] mb:mb-[48px] mb-[32px]">
+                            <button
+                                onClick={() => {
+                                    setDis(false);
+                                }}
+                                className="px-[23px] py-[17px] text-[12px] font-bold text-[#7E88C3] bg-[#F9FAFE] rounded-[26px] active:scale-90 transition-all"
+                            >
+                                Cancel
+                            </button>
+                            <button className="px-[23px] py-[17px] text-[12px] font-bold text-white bg-[#EC5757] rounded-[26px] active:scale-90 transition-all">
+                                Delete
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
     );
 }

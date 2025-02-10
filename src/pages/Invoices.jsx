@@ -20,8 +20,9 @@ function Invoices() {
     function handleNav(id) {
         navigate(`/details/${id}`);
     }
+
     return (
-        <div>
+        <div className="relative">
             <div className="xl:mt-[32px] max-w-[800px] xl:w-[100%] mx-auto p-[24px] dark:bg-[#141625]">
                 <div className="flex items-center mt-[32px] mb-[32px] justify-between w-[100%]">
                     <div className="">
