@@ -2,6 +2,7 @@ import React, { createContext, useEffect, useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import Invoices from "./pages/Invoices";
 import MainLayout from "./layouts/MainLayout";
+import InvoiceDetails from "./pages/InvoiceDetails";
 export const ThemeContext = createContext(null);
 
 function App() {
@@ -18,7 +19,7 @@ function App() {
         }
     }, [theme]);
     return (
-        <div className="dark:bg-[#141625]">
+        <div className="dark:bg-[#141625] min-h-svh">
             <ThemeContext.Provider value={{ theme, setTheme }}>
                 <Routes>
                     <Route
@@ -26,6 +27,14 @@ function App() {
                         element={
                             <MainLayout>
                                 <Invoices></Invoices>
+                            </MainLayout>
+                        }
+                    ></Route>
+                    <Route
+                        path="/details/:id"
+                        element={
+                            <MainLayout>
+                                <InvoiceDetails></InvoiceDetails>
                             </MainLayout>
                         }
                     ></Route>

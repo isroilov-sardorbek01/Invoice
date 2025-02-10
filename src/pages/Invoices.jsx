@@ -2,11 +2,13 @@ import React, { useEffect, useState } from "react";
 import data from "../assets/data.json";
 import btnImg from "../images/btnImg.svg";
 import novicesImg from "../images/novicesImg.svg";
+import { useNavigate } from "react-router-dom";
 
 function Invoices() {
     const [num, setNum] = useState(data.length);
     const [sel, setSel] = useState("All");
     const [voices, setVoices] = useState(data);
+    const navigate = useNavigate();
 
     useEffect(() => {
         if (sel === "All") {
@@ -15,9 +17,12 @@ function Invoices() {
             setVoices(data.filter((prev) => prev.status === sel));
         }
     }, [sel]);
+    function handleNav(id) {
+        navigate(`/details/${id}`);
+    }
     return (
         <div>
-            <div className="xl:mt-[32px] xl:max-w-[1000px] xl:w-[100%] mx-auto p-[24px] dark:bg-[#141625]">
+            <div className="xl:mt-[32px] max-w-[800px] xl:w-[100%] mx-auto p-[24px] dark:bg-[#141625]">
                 <div className="flex items-center mt-[32px] mb-[32px] justify-between w-[100%]">
                     <div className="">
                         <h1 className="sm:text-[20xp] md:text-[32px] dark:text-white font-bold text-[#0C0E16]">
@@ -39,7 +44,7 @@ function Invoices() {
                             <option value="draft">Draft</option>
                             <option value="pending">Pending</option>
                             <option value="paid">Paid</option>
-                            <option value="">s</option>
+                            <option value="">Error</option>
                         </select>
                         <div className="sm:max-w-[120px] w-[100%] rounded-[24px] bg-[#7C5DFA] p-[6px] flex items-center gap-3 text-white active:scale-90 transition-all cursor-pointer">
                             <img src={btnImg} alt="img" />
@@ -49,12 +54,15 @@ function Invoices() {
                         </div>
                     </div>
                 </div>
-                <div className="max-h-[400px] overflow-y-scroll scrollingC pt-2 pb-4">
+                <div className="">
                     <div className="flex flex-col justify-center gap-2 dark:text-white ">
                         {voices.length > 0 ? (
                             voices.map((value, index) => {
                                 return (
                                     <div
+                                        onClick={() => {
+                                            handleNav(value.id);
+                                        }}
                                         className="px-4 sm:px-6 mt-4 flex flex-col justify-center gap-[16px]"
                                         key={value.id}
                                     >
@@ -125,7 +133,7 @@ function Invoices() {
                                 );
                             })
                         ) : (
-                            <div className="flex flex-col items-center justify-center text-center bg-white">
+                            <div className="flex flex-col items-center justify-center text-center ">
                                 <img
                                     src={novicesImg}
                                     className="max-w-[241px] w-[100%] max-h-[200px] h-[100%] "

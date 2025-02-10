@@ -22,13 +22,13 @@ function LayoutLeft() {
         setTheme(prevTheme)
     } , [])
     return (
-        <div className="md:max-w-[1024px] md:h-[80px] flex items-center justify-between bg-[#373B53] dark:bg-[#1E2139] lg:flex-col lg:max-w-[103px] w-[100%] lg:h-dvh lg:rounded-tr-[29px] lg:rounded-br-[29px]">
+        <div className="md:max-w-[1284px] md:h-[80px] flex items-center justify-between bg-[#373B53] dark:bg-[#1E2139] xl:flex-col xl:max-w-[103px] w-[100%] xl:h-dvh xl:rounded-tr-[29px] xl:rounded-br-[29px] xl:fixed xl:top-0 xl:left-0 xl:bottom-0">
             <img
                 src={image}
                 className="max-w-[103px] w-[100%] max-h-[103px] h-[100%]"
                 alt=""
             />
-            <div className="flex gap-[49px] md:justify-between sm:justify-between p-6 lg:flex-col lg:items-center">
+            <div className="flex gap-[49px] md:justify-between sm:justify-between p-6 xl:flex-col xl:items-center">
                 <img
                     width={20}
                     height={20}
