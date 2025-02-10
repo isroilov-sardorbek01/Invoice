@@ -49,40 +49,42 @@ function Invoices() {
                         </div>
                     </div>
                 </div>
-                <div className="flex flex-col justify-center gap-2 dark:text-white">
-                    {voices.length > 0 ? (
-                        voices.map((value, index) => {
-                            return (
-                                <div
-                                    className="px-4 sm:px-6 mt-4 flex flex-col gap-[16px]"
-                                    key={value.id}
-                                >
+                <div className="max-h-[400px] overflow-y-scroll scrollingC pt-2 pb-4">
+                    <div className="flex flex-col justify-center gap-2 dark:text-white ">
+                        {voices.length > 0 ? (
+                            voices.map((value, index) => {
+                                return (
                                     <div
-                                        className="daerk:text-white shadow-md hover:shadow-xl dark:bg-[#1E2139] text-black drop-shadow-md bg-whitea
-                                         sm:w-full rounded-lg p-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 cursor-pointer hover:drop-shadow-lg transition-all"
+                                        className="px-4 sm:px-6 mt-4 flex flex-col justify-center gap-[16px]"
+                                        key={value.id}
                                     >
-                                        <div className="flex items-center justify-between w-full sm:justify-start sm:gap-8 sm:w-auto">
-                                            <h2 className="text-sm font-extrabold dark:text-white">
-                                                <span className="text-[#7E88C3]">
-                                                    #
-                                                </span>
-                                                {value.id}
-                                            </h2>
-                                            <h2 className="sm:block dark:text-white">
-                                                {value.clientName}
-                                            </h2>
-                                        </div>
-                                        <div className="flex justify-between w-full sm:w-auto sm:justify-start sm:gap-8">
-                                            <div className="md:flex md:items-center md:gap-[73px]">
-                                                <p className=" text-[#888EB0] dark:text-[#DFE3FA] text-xs  xl:flex">
-                                                    {value.paymentDue}
-                                                </p>
-                                                <h2 className="text-lg font-bold text-[#0C0E16] dark:text-white">
-                                                    £{value.total.toFixed(2)}
+                                        <div
+                                            className="dark:text-white shadow-md hover:shadow-xl dark:bg-[#1E2139] text-black bg-white
+                                         sm:w-full rounded-lg p-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 cursor-pointer transition-all"
+                                        >
+                                            <div className="flex items-center justify-between w-full sm:justify-start sm:gap-8 sm:w-auto">
+                                                <h2 className="text-sm font-extrabold dark:text-white">
+                                                    <span className="text-[#7E88C3]">
+                                                        #
+                                                    </span>
+                                                    {value.id}
+                                                </h2>
+                                                <h2 className="sm:block dark:text-white">
+                                                    {value.clientName}
                                                 </h2>
                                             </div>
-                                            <div
-                                                className={`
+                                            <div className="flex justify-between w-full sm:w-auto sm:justify-start sm:gap-8">
+                                                <div className="md:flex md:items-center md:gap-[73px]">
+                                                    <p className=" text-[#888EB0] dark:text-[#DFE3FA] text-xs  xl:flex">
+                                                        {value.paymentDue}
+                                                    </p>
+                                                    <h2 className="text-lg font-bold text-[#0C0E16] dark:text-white">
+                                                        £
+                                                        {value.total.toFixed(2)}
+                                                    </h2>
+                                                </div>
+                                                <div
+                                                    className={`
                                                     ${
                                                         value.status == "paid"
                                                             ? "bg-[#F3FCF9] dark:bg-[#1F2B3F]"
@@ -91,49 +93,52 @@ function Invoices() {
                                                             ? "bg-[#F3F3F5] dark:bg-[#292C44]"
                                                             : "bg-[#FFF8F0] dark:bg-[#2B2736]"
                                                     } flex items-center justify-center rounded-md gap-2 w-[104px] h-10`}
-                                            >
-                                                <div
-                                                    className={`w-2 h-2 rounded-full ${
-                                                        value.status == "paid"
-                                                            ? "bg-[#33D69F]"
-                                                            : value.status ==
-                                                              "draft"
-                                                            ? "bg-[#FFF8F0]"
-                                                            : " bg-[#FF8F00] "
-                                                    }`}
-                                                ></div>
-                                                <h2
-                                                    className={`${
-                                                        value.status == "paid"
-                                                            ? "text-[#33D69F]"
-                                                            : value.status ==
-                                                              "draft"
-                                                            ? "text-[#fff]"
-                                                            : "text-[#FF8F00]"
-                                                    } text-sm`}
                                                 >
-                                                    {value.status}
-                                                </h2>
+                                                    <div
+                                                        className={`w-2 h-2 rounded-full ${
+                                                            value.status ==
+                                                            "paid"
+                                                                ? "bg-[#33D69F]"
+                                                                : value.status ==
+                                                                  "draft"
+                                                                ? "bg-[#FFF8F0]"
+                                                                : " bg-[#FF8F00] "
+                                                        }`}
+                                                    ></div>
+                                                    <h2
+                                                        className={`${
+                                                            value.status ==
+                                                            "paid"
+                                                                ? "text-[#33D69F]"
+                                                                : value.status ==
+                                                                  "draft"
+                                                                ? "text-[#fff]"
+                                                                : "text-[#FF8F00]"
+                                                        } text-sm`}
+                                                    >
+                                                        {value.status}
+                                                    </h2>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            );
-                        })
-                    ) : (
-                        <div className="">
-                            <img
-                                src={novicesImg}
-                                className="max-w-[241px] w-[100%] max-h-[200px] h-[100%] flex justify-center"
-                                alt=""
-                            />
-                            <h1>There is nothing here</h1>
-                            <p>
-                                Create an invoice by clicking the
-                                <span>New</span> button and get started
-                            </p>
-                        </div>
-                    )}
+                                );
+                            })
+                        ) : (
+                            <div className="flex flex-col items-center justify-center text-center bg-white">
+                                <img
+                                    src={novicesImg}
+                                    className="max-w-[241px] w-[100%] max-h-[200px] h-[100%] "
+                                    alt=""
+                                />
+                                <h1>There is nothing here</h1>
+                                <p>
+                                    Create an invoice by clicking the
+                                    <span>New</span> button and get started
+                                </p>
+                            </div>
+                        )}
+                    </div>
                 </div>
             </div>
         </div>
