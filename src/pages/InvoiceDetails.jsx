@@ -69,7 +69,12 @@ function InvoiceDetails() {
                             <button className="px-[23px] py-[17px] text-[12px] font-bold text-[#7E88C3] bg-[#F9FAFE] rounded-[26px] active:scale-90 transition-all dark:bg-[#252945] dark:text-[#DFE3FA]">
                                 Edit
                             </button>
-                            <button className="px-[23px] py-[17px] text-[12px] font-bold text-white bg-[#EC5757] rounded-[26px] active:scale-90 transition-all">
+                            <button
+                                onClick={() => {
+                                    handleDel(voice.id);
+                                }}
+                                className="px-[23px] py-[17px] text-[12px] font-bold text-white bg-[#EC5757] rounded-[26px] active:scale-90 transition-all"
+                            >
                                 Delete
                             </button>
                             <button className="px-[27px] py-[17px] text-[12px] font-bold text-white bg-[#7C5DFA] rounded-[26px] active:scale-90 transition-all">
