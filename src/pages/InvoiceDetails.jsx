@@ -1,22 +1,41 @@
-import React, { useEffect, useState } from "react";
-import { NavLink, useParams } from "react-router-dom";
-import data from "../assets/data.json";
+import React, { useContext, useEffect, useState } from "react";
+import { NavLink, useNavigate, useParams } from "react-router-dom";
 import arrowImg from "../images/arowImg.svg";
+import { toast } from "react-toastify";
+import { DataContext } from "../App";
 
 function InvoiceDetails() {
     const { id } = useParams();
     const [voice, setVoice] = useState({});
     const [dis, setDis] = useState(false);
+    const { api, setApi } = useContext(DataContext);
+    const navigate = useNavigate();
 
     useEffect(() => {
-        const value = data.find((prev) => prev.id === id);
+        const value = api.find((prev) => prev.id === id);
         setVoice(value);
     }, []);
 
     console.log(voice);
 
-    function handleDel(id) {
+    function handleOpenModal() {
         setDis(true);
+    }
+    function handleDel(id) {
+        toast.info("Invoice deleted succesfully!", {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: false,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+        });
+        const locData = JSON.parse(localStorage.getItem("data"));
+        const filtered = locData.filter((prev) => prev.id !== id);
+        setApi(filtered);
+        navigate("/");
     }
     return (
         <div className="relative">
@@ -67,19 +86,17 @@ function InvoiceDetails() {
                                 </h1>
                             </div>
                         </div>
-                        <div className="flex items-center justify-between hidden md:gap-3 md:block">
+                        <div className="md:flex items-center justify-between gap-3 hidden pl-[10px]">
                             <button className="px-[23px] py-[17px] text-[12px] font-bold text-[#7E88C3] bg-[#F9FAFE] rounded-[26px] active:scale-90 transition-all dark:bg-[#252945] dark:text-[#DFE3FA] hover:bg-[#DFE3FA] dark:hover:bg-white dark:hover:text-[#7E88C3]">
                                 Edit
                             </button>
                             <button
-                                onClick={() => {
-                                    handleDel(voice.id);
-                                }}
+                                onClick={handleOpenModal}
                                 className="px-[23px] py-[17px] text-[12px] font-bold text-white bg-[#EC5757] rounded-[26px] active:scale-90 transition-all hover:bg-[#FF9797] "
                             >
                                 Delete
                             </button>
-                            <button className="px-[27px] py-[17px] text-[12px] font-bold text-white bg-[#7C5DFA] rounded-[26px] active:scale-90 transition-all hover:bg-[#9277FF] dark:hover:bg-[#9277FF]">
+                            <button className="px-[27px] py-[17px] text-[12px] font-bold text-white bg-[#7C5DFA] rounded-[26px] active:scale-90 transition-all hover:bg-[#9277FF] dark:hover:bg-[#9277FF] whitespace-nowrap">
                                 Mark as Paid
                             </button>
                         </div>
@@ -203,9 +220,7 @@ function InvoiceDetails() {
                         Edit
                     </button>
                     <button
-                        onClick={() => {
-                            handleDel(voice.id);
-                        }}
+                        onClick={handleOpenModal}
                         className="px-[23px] py-[17px] text-[12px] font-bold text-white bg-[#EC5757] rounded-[26px] active:scale-90 transition-all hover:bg-[#FF9797]"
                     >
                         Delete
@@ -237,7 +252,12 @@ function InvoiceDetails() {
                             >
                                 Cancel
                             </button>
-                            <button className="px-[23px] py-[17px] text-[12px] font-bold text-white bg-[#EC5757] rounded-[26px] active:scale-90 transition-all ">
+                            <button
+                                onClick={() => {
+                                    handleDel(voice.id);
+                                }}
+                                className="px-[23px] py-[17px] text-[12px] font-bold text-white bg-[#EC5757] rounded-[26px] active:scale-90 transition-all "
+                            >
                                 Delete
                             </button>
                         </div>

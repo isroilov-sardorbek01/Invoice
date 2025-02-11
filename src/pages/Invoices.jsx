@@ -1,36 +1,41 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import data from "../assets/data.json";
 import btnImg from "../images/btnImg.svg";
 import novicesImg from "../images/novicesImg.svg";
 import { useNavigate } from "react-router-dom";
+import AddInvoice from "../components/AddInvoice";
+import { DataContext } from "../App";
 
-function Invoices() {
-    const [num, setNum] = useState(data.length);
+export function Invoices() {
     const [sel, setSel] = useState("All");
-    const [voices, setVoices] = useState(data);
     const navigate = useNavigate();
+    const [open, setOpen] = useState(false);
+    const { api, setApi } = useContext(DataContext);
+    localStorage.setItem("data", JSON.stringify(data));
 
     useEffect(() => {
+        const info = JSON.parse(localStorage.getItem("data"));
         if (sel === "All") {
-            setVoices(data);
+            setApi(info);
         } else {
-            setVoices(data.filter((prev) => prev.status === sel));
+            setApi(info.filter((prev) => prev.status === sel));
         }
     }, [sel]);
+
     function handleNav(id) {
         navigate(`/details/${id}`);
     }
 
     return (
         <div className="relative">
-            <div className="xl:mt-[32px] max-w-[800px] xl:w-[100%] mx-auto p-[24px] dark:bg-[#141625]">
+            <div className="xl:mt-[32px] max-w-[800px] xl:w-[100%] mx-auto p-[24px] dark:bg-[#141625] z-1">
                 <div className="flex items-center mt-[32px] mb-[32px] justify-between w-[100%]">
                     <div className="">
                         <h1 className="sm:text-[20xp] md:text-[32px] dark:text-white font-bold text-[#0C0E16]">
                             Invoices
                         </h1>
                         <h1 className="sm:text-[12px] md:text dark:text-[#DFE3FA] text-[#888EB0]">
-                            {num} invoices
+                            {api.length} invoices
                         </h1>
                     </div>
                     <div className="flex gap-[18px]">
@@ -47,7 +52,12 @@ function Invoices() {
                             <option value="paid">Paid</option>
                             <option value="">Error</option>
                         </select>
-                        <div className="sm:max-w-[120px] w-[100%] rounded-[24px] bg-[#7C5DFA] p-[6px] flex items-center gap-3 text-white active:scale-90 transition-all cursor-pointer">
+                        <div
+                            onClick={() => {
+                                setOpen(true);
+                            }}
+                            className="sm:max-w-[120px] w-[100%] rounded-[24px] bg-[#7C5DFA] p-[6px] flex items-center gap-3 text-white active:scale-90 transition-all cursor-pointer"
+                        >
                             <img src={btnImg} alt="img" />
                             <h1 className="text-[12px] font-bold pr-[14px]">
                                 New
@@ -56,9 +66,9 @@ function Invoices() {
                     </div>
                 </div>
                 <div className="">
-                    <div className="flex flex-col justify-center gap-2 dark:text-white ">
-                        {voices.length > 0 ? (
-                            voices.map((value, index) => {
+                    <div className="flex flex-col justify-center gap-2 dark:text-white mb-[40px]">
+                        {api.length > 0 ? (
+                            api.map((value, index) => {
                                 return (
                                     <div
                                         onClick={() => {
@@ -88,8 +98,7 @@ function Invoices() {
                                                         {value.paymentDue}
                                                     </p>
                                                     <h2 className="text-lg font-bold text-[#0C0E16] dark:text-white">
-                                                        £
-                                                        {value.total.toFixed(2)}
+                                                        £{value.total}
                                                     </h2>
                                                 </div>
                                                 <div
@@ -140,16 +149,27 @@ function Invoices() {
                                     className="mb-[40px] md:mb-[64px] animate-slide-down max-w-[241px] w-[100%] max-h-[200px] h-[100%] "
                                     alt=""
                                 />
-                                <h1 className="text-[20px] text-[#0C0E16] mb-[24px] font-bold animate-slide-down dark:text-white">There is nothing here</h1>
+                                <h1 className="text-[20px] text-[#0C0E16] mb-[24px] font-bold animate-slide-down dark:text-white">
+                                    There is nothing here
+                                </h1>
                                 <p className="text-[#888EB0] text-[12px] animate-slide-down dark:text-[#DFE3FA]">
                                     Create an invoice by clicking the <br />
-                                    <span className="font-bold"> New</span> button and get started
+                                    <span className="font-bold"> New</span>{" "}
+                                    button and get started
                                 </p>
                             </div>
                         )}
                     </div>
                 </div>
             </div>
+            {open && (
+                <AddInvoice
+                    open={open}
+                    onClose={() => {
+                        setOpen(false);
+                    }}
+                ></AddInvoice>
+            )}
         </div>
     );
 }
