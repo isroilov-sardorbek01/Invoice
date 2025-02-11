@@ -30,6 +30,58 @@ function AddInvoice({ open, onClose }) {
         paymentTerms: "1",
         description: "",
     });
+    function validate() {
+        if (formData.senderStreet.length <= 10) {
+            error("Street Address 10ta belgidan kam!");
+            return false;
+        }
+        if (formData.senderCity.length < 4) {
+            error("City Address 4ta belgidan kam!");
+            return false;
+        }
+        if (formData.senderPostCode.length < 6) {
+            error("Post Code 6ta belgidan kam!");
+            return false;
+        }
+        if (formData.senderCountry.length <= 2) {
+            error("Country 2ta belgidan kam!");
+            return false;
+        }
+        if (formData.clientName.length <= 2) {
+            error("Client Name 3ta belgidan kam!");
+            return false;
+        }
+        if (formData.clientEmail.length < 11) {
+            error("Client Email 11ta belgidan kam!");
+            return false;
+        }
+        if (formData.clientStreet.length <= 10) {
+            error("Street Address 10ta belgidan kam!");
+            return false;
+        }
+        if (formData.clientCity.length <= 3) {
+            error("City 3ta belgidan kam!");
+            return false;
+        }
+        if (formData.clientPostCode.length < 6) {
+            error("Post Code 6ta belgidan kam!");
+            return false;
+        }
+        if (formData.clientCountry.length < 2) {
+            error("Country 6ta belgidan kam!");
+            return false;
+        }
+        if (formData.clientPostCode.length < 6) {
+            error("Post Code 6ta belgidan kam!");
+            return false;
+        }
+        if (formData.description.length < 15) {
+            error("Description 15ta belgidan kam!");
+            return false;
+        }
+        return true;
+    }
+    
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });

@@ -2,9 +2,9 @@ import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { DataContext } from "../App";
 import data from "../assets/data.json";
-import AddInvoice from "../components/AddInvoice";
 import btnImg from "../images/btnImg.svg";
 import novicesImg from "../images/novicesImg.svg";
+import AddInvoice from "../components/AddInvoice";
 
 export function Invoices() {
     const [sel, setSel] = useState("All");
