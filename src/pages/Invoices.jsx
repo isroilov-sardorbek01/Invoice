@@ -39,7 +39,7 @@ function Invoices() {
                             onChange={(e) => {
                                 setSel(e.target.value);
                             }}
-                            className="sm:text-[12px] text-[#0C0E16] cursor-pointer dark:bg-[#141625] dark:text-white"
+                            className="text-[12px] font-bold text-[#0C0E16] cursor-pointer dark:bg-[#141625] dark:text-white outline-none"
                         >
                             <option value="All">All</option>
                             <option value="draft">Draft</option>
@@ -64,11 +64,11 @@ function Invoices() {
                                         onClick={() => {
                                             handleNav(value.id);
                                         }}
-                                        className="px-4 sm:px-6 mt-4 flex flex-col justify-center gap-[16px]"
+                                        className="animate-slide-down px-4 sm:px-6 mt-4 flex flex-col justify-center gap-[16px]"
                                         key={value.id}
                                     >
                                         <div
-                                            className="dark:text-white shadow-md hover:shadow-xl dark:bg-[#1E2139] text-black bg-white
+                                            className="dark:text-white shadow-md lg:hover:shadow-xl dark:bg-[#1E2139] text-black bg-white
                                          sm:w-full rounded-lg p-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 cursor-pointer transition-all"
                                         >
                                             <div className="flex items-center justify-between w-full sm:justify-start sm:gap-8 sm:w-auto">
@@ -134,16 +134,16 @@ function Invoices() {
                                 );
                             })
                         ) : (
-                            <div className="flex flex-col items-center justify-center text-center ">
+                            <div className="flex flex-col items-center justify-center text-center mt-[102px]">
                                 <img
                                     src={novicesImg}
-                                    className="max-w-[241px] w-[100%] max-h-[200px] h-[100%] "
+                                    className="mb-[40px] md:mb-[64px] animate-slide-down max-w-[241px] w-[100%] max-h-[200px] h-[100%] "
                                     alt=""
                                 />
-                                <h1>There is nothing here</h1>
-                                <p>
-                                    Create an invoice by clicking the
-                                    <span>New</span> button and get started
+                                <h1 className="text-[20px] text-[#0C0E16] mb-[24px] font-bold animate-slide-down dark:text-white">There is nothing here</h1>
+                                <p className="text-[#888EB0] text-[12px] animate-slide-down dark:text-[#DFE3FA]">
+                                    Create an invoice by clicking the <br />
+                                    <span className="font-bold"> New</span> button and get started
                                 </p>
                             </div>
                         )}

@@ -3,6 +3,7 @@ import { Route, Routes } from "react-router-dom";
 import Invoices from "./pages/Invoices";
 import MainLayout from "./layouts/MainLayout";
 import InvoiceDetails from "./pages/InvoiceDetails";
+import AddInvoice from "./pages/AddInvoice";
 export const ThemeContext = createContext(null);
 
 function App() {
@@ -35,6 +36,14 @@ function App() {
                         element={
                             <MainLayout>
                                 <InvoiceDetails></InvoiceDetails>
+                            </MainLayout>
+                        }
+                    ></Route>
+                    <Route
+                        path="/add"
+                        element={
+                            <MainLayout>
+                                <AddInvoice></AddInvoice>
                             </MainLayout>
                         }
                     ></Route>

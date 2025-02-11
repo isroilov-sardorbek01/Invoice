@@ -20,16 +20,18 @@ function InvoiceDetails() {
     }
     return (
         <div className="relative">
-            <div className="mx-auto max-w-[730px] w-[100%]">
+            <div className="mx-auto max-w-[730px] w-[100%] pb-[56px]">
                 <div className="px-[24px]">
                     <NavLink
                         to="/"
-                        className="flex items-center justify-start gap-[23px] mt-[32px]"
+                        className="flex items-center justify-start gap-[23px] mt-[32px] hover:text-[#7E88C3] dark:hover:text-[#888EB0]"
                     >
                         <img src={arrowImg} width={9} height={5} alt="" />
-                        <h1>Go back</h1>
+                        <h1 className="text-[12px] font-bold  text-[#0C0E16] dark:text-white dark:hover:text-[#888EB0] transition-colors">
+                            Go back
+                        </h1>
                     </NavLink>
-                    <div className="flex items-center justify-between p-[24px] w-[100%] rounded-[8px] shadow-md mt-[32px] mb-[16px] dark:bg-[#1E2139]">
+                    <div className="flex animate-slide-down items-center justify-between p-[24px] w-[100%] rounded-[8px] shadow-md mt-[32px] mb-[16px] dark:bg-[#1E2139]">
                         <div className="flex items-center justify-between md:gap-4 w-[100%] md:w-[30%]">
                             <h1>Status</h1>
                             <div
@@ -66,23 +68,23 @@ function InvoiceDetails() {
                             </div>
                         </div>
                         <div className="flex items-center justify-between hidden md:gap-3 md:block">
-                            <button className="px-[23px] py-[17px] text-[12px] font-bold text-[#7E88C3] bg-[#F9FAFE] rounded-[26px] active:scale-90 transition-all dark:bg-[#252945] dark:text-[#DFE3FA]">
+                            <button className="px-[23px] py-[17px] text-[12px] font-bold text-[#7E88C3] bg-[#F9FAFE] rounded-[26px] active:scale-90 transition-all dark:bg-[#252945] dark:text-[#DFE3FA] hover:bg-[#DFE3FA] dark:hover:bg-white dark:hover:text-[#7E88C3]">
                                 Edit
                             </button>
                             <button
                                 onClick={() => {
                                     handleDel(voice.id);
                                 }}
-                                className="px-[23px] py-[17px] text-[12px] font-bold text-white bg-[#EC5757] rounded-[26px] active:scale-90 transition-all"
+                                className="px-[23px] py-[17px] text-[12px] font-bold text-white bg-[#EC5757] rounded-[26px] active:scale-90 transition-all hover:bg-[#FF9797] "
                             >
                                 Delete
                             </button>
-                            <button className="px-[27px] py-[17px] text-[12px] font-bold text-white bg-[#7C5DFA] rounded-[26px] active:scale-90 transition-all">
+                            <button className="px-[27px] py-[17px] text-[12px] font-bold text-white bg-[#7C5DFA] rounded-[26px] active:scale-90 transition-all hover:bg-[#9277FF] dark:hover:bg-[#9277FF]">
                                 Mark as Paid
                             </button>
                         </div>
                     </div>
-                    <div className="p-[24px] dark:bg-[#1E2139] shadow-md rounded-[8px] mt-[16px] mb-[56px]">
+                    <div className="p-[24px] animate-slide-down dark:bg-[#1E2139] shadow-md rounded-[8px] mt-[16px] mb-[56px]">
                         <div className="md:flex md:justify-between">
                             <div className="mb-[30px]">
                                 <h1 className="font-bold sm:text-[14px] md:text-[16px] mb-[8px] text-black dark:text-white">
@@ -195,27 +197,30 @@ function InvoiceDetails() {
                     </div>
                 </div>
             </div>
-            <div className="max-w-[730px] w-[100%] mx-auto py-[21px] px-[24px] h-[91px] md:mb-[40px] shadow-lg rounded-[8px] dark:bg-[#1E2139] bg-white md:hidden">
+            <div className="max-w-[780px] fixed bottom-0 w-[100%] mx-auto py-[21px] px-[24px] h-[91px] md:mb-[40px] shadow-lg  dark:bg-[#1E2139] bg-white md:hidden ">
                 <div className="flex items-center justify-between">
-                    <button className="px-[23px] py-[17px] text-[12px] font-bold text-[#7E88C3] bg-[#F9FAFE] rounded-[26px] active:scale-90 transition-all dark:bg-[#252945] dark:text-[#DFE3FA]">
+                    <button className="px-[23px] py-[17px] text-[12px] font-bold text-[#7E88C3] bg-[#F9FAFE] rounded-[26px] active:scale-90 transition-all dark:bg-[#252945] dark:text-[#DFE3FA] hover:bg-[#DFE3FA] dark:hover:bg-white dark:hover:text-[#7E88C3]">
                         Edit
                     </button>
                     <button
                         onClick={() => {
                             handleDel(voice.id);
                         }}
-                        className="px-[23px] py-[17px] text-[12px] font-bold text-white bg-[#EC5757] rounded-[26px] active:scale-90 transition-all"
+                        className="px-[23px] py-[17px] text-[12px] font-bold text-white bg-[#EC5757] rounded-[26px] active:scale-90 transition-all hover:bg-[#FF9797]"
                     >
                         Delete
                     </button>
-                    <button className="px-[27px] py-[17px] text-[12px] font-bold text-white bg-[#7C5DFA] rounded-[26px] active:scale-90 transition-all">
+                    <button className="hover:bg-[#9277FF] dark:hover:bg-[#9277FF] px-[27px] py-[17px] text-[12px] font-bold text-white bg-[#7C5DFA] rounded-[26px] active:scale-90 transition-all ">
                         Mark as Paid
                     </button>
                 </div>
             </div>
             {dis === true && (
-                <div className="fixed inset-0 flex items-center justify-center px-3 bg-black bg-opacity-50">
-                    <div className="max-w-[480px] w-full bg-white p-6 rounded-lg shadow-lg">
+                <div className="fixed inset-0 flex items-center justify-center px-3 transition-opacity bg-black bg-opacity-50 ">
+                    <div
+                        className="max-w-[480px] w-full bg-white p-6 rounded-lg shadow-lg animate-slide-down"
+                        id="animatedModal"
+                    >
                         <h1 className="mt-[48px] text-[#0C0E16] text-[24px] font-bold mb-[13px]">
                             Confirm Deletion
                         </h1>
@@ -232,7 +237,7 @@ function InvoiceDetails() {
                             >
                                 Cancel
                             </button>
-                            <button className="px-[23px] py-[17px] text-[12px] font-bold text-white bg-[#EC5757] rounded-[26px] active:scale-90 transition-all">
+                            <button className="px-[23px] py-[17px] text-[12px] font-bold text-white bg-[#EC5757] rounded-[26px] active:scale-90 transition-all ">
                                 Delete
                             </button>
                         </div>
