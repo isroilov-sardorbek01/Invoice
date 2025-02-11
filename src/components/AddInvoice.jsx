@@ -10,11 +10,12 @@ function AddInvoice({ open, onClose }) {
             setIsClosing(false);
         }
     }, [open]);
-    function handleClose(){
-        setIsClosing(true)
-        setTimeout(onClose , 100)
+    function handleClose() {
+        setIsClosing(true);
+        setTimeout(onClose, 100);
     }
     const [formData, setFormData] = useState({
+        id: Date.now(),
         senderStreet: "",
         senderCity: "",
         senderPostCode: "",
@@ -33,12 +34,17 @@ function AddInvoice({ open, onClose }) {
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
-    console.log();
 
     return (
-        <div className={`fixed top-0 left-0 z-40 flex items-center justify-center bg-black backdrop-sepia ${!isClosing ? "animate-slideInLeft" : "animate-slideInRight"}`}>
-            <div className="scrollbar-hide flex flex-col opacity-1 dark:text-white dark:bg-[#141625] bg-white md:pl-[150px] py-16 px-6 h-screen md:w-[768px] md:rounded-r-3xl">
-                <h1 className="text-3xl font-semibold">Create Invoice</h1>
+        <div
+            className={`fixed top-0  left-0 z-30 flex items-center justify-center bg-black bg-opacity-50 backdrop-sepia ${
+                !isClosing ? "animate-slideInLeft" : "animate-slideInRight"
+            }`}
+        >
+            <div className="scrollbar-hide flex flex-col  opacity-1 dark:text-white dark:bg-[#141625] bg-white md:pl-[150px] py-16 px-6 h-screen md:w-[768px] md:rounded-r-3xl">
+                <h1 className="text-[#0C0E16] text-[24px] font-bold">
+                    Create Invoice
+                </h1>
                 <form
                     onSubmit={(e) => {
                         e.preventDefault();
@@ -46,10 +52,13 @@ function AddInvoice({ open, onClose }) {
                     }}
                     className="overflow-y-scroll scrollbar-hide my-14"
                 >
-                    <h1 className="text-[#7c5dfa] mb-4 font-medium">
+                    <h1 className="text-[#7c5dfa] mb-[24px] font-bold text-[12px]">
                         Bill From
                     </h1>
                     <div className="grid grid-cols-3 gap-4">
+                        <h1 className="text-[12px] font-medium text-[#7E88C3] mb-[10px]">
+                            Street Adress
+                        </h1>
                         <input
                             name="senderStreet"
                             value={formData.senderStreet}

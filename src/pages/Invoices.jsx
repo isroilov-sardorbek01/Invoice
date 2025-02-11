@@ -1,18 +1,21 @@
 import React, { useContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { DataContext } from "../App";
 import data from "../assets/data.json";
+import AddInvoice from "../components/AddInvoice";
 import btnImg from "../images/btnImg.svg";
 import novicesImg from "../images/novicesImg.svg";
-import { useNavigate } from "react-router-dom";
-import AddInvoice from "../components/AddInvoice";
-import { DataContext } from "../App";
 
 export function Invoices() {
     const [sel, setSel] = useState("All");
     const navigate = useNavigate();
     const [open, setOpen] = useState(false);
     const { api, setApi } = useContext(DataContext);
-    localStorage.setItem("data", JSON.stringify(data));
-
+    useEffect(() => {
+        !JSON.parse(localStorage.getItem("data"))
+            ? localStorage.setItem("data", JSON.stringify(data))
+            : JSON.parse(localStorage.getItem("data"));
+    }, []);
     useEffect(() => {
         const info = JSON.parse(localStorage.getItem("data"));
         if (sel === "All") {
@@ -35,7 +38,7 @@ export function Invoices() {
                             Invoices
                         </h1>
                         <h1 className="sm:text-[12px] md:text dark:text-[#DFE3FA] text-[#888EB0]">
-                            {api.length} invoices
+                            {api?.length ? api.length : "0"} invoices
                         </h1>
                     </div>
                     <div className="flex gap-[18px]">

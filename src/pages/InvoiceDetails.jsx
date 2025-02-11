@@ -35,8 +35,29 @@ function InvoiceDetails() {
         const locData = JSON.parse(localStorage.getItem("data"));
         const filtered = locData.filter((prev) => prev.id !== id);
         setApi(filtered);
+        localStorage.setItem("data", JSON.stringify(filtered));
         navigate("/");
     }
+    function handleMarkUp(id) {
+        const loc = JSON.parse(localStorage.getItem("data")) || [];
+        const updatedData = loc.map((item) =>
+            item.id === id ? { ...item, status: "paid" } : item
+        );
+        localStorage.setItem("data", JSON.stringify(updatedData));
+        toast.info("Invoice marked for Paid!", {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: false,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+        });
+        setApi(updatedData);
+        navigate("/");
+    }
+
     return (
         <div className="relative">
             <div className="mx-auto max-w-[730px] w-[100%] pb-[56px]">
@@ -86,19 +107,26 @@ function InvoiceDetails() {
                                 </h1>
                             </div>
                         </div>
-                        <div className="md:flex items-center justify-between gap-3 hidden pl-[10px]">
+                        <div className="items-center hidden md:flex gap-[10px]">
                             <button className="px-[23px] py-[17px] text-[12px] font-bold text-[#7E88C3] bg-[#F9FAFE] rounded-[26px] active:scale-90 transition-all dark:bg-[#252945] dark:text-[#DFE3FA] hover:bg-[#DFE3FA] dark:hover:bg-white dark:hover:text-[#7E88C3]">
                                 Edit
                             </button>
                             <button
                                 onClick={handleOpenModal}
-                                className="px-[23px] py-[17px] text-[12px] font-bold text-white bg-[#EC5757] rounded-[26px] active:scale-90 transition-all hover:bg-[#FF9797] "
+                                className="px-[23px] py-[17px] text-[12px] font-bold text-white bg-[#EC5757] rounded-[26px] active:scale-90 transition-all hover:bg-[#FF9797]"
                             >
                                 Delete
                             </button>
-                            <button className="px-[27px] py-[17px] text-[12px] font-bold text-white bg-[#7C5DFA] rounded-[26px] active:scale-90 transition-all hover:bg-[#9277FF] dark:hover:bg-[#9277FF] whitespace-nowrap">
-                                Mark as Paid
-                            </button>
+                            {voice.status === "pending" && (
+                                <button
+                                    onClick={() => {
+                                        handleMarkUp(voice.id);
+                                    }}
+                                    className="hover:bg-[#9277FF] dark:hover:bg-[#9277FF] px-[27px] py-[17px] text-[12px] font-bold text-white bg-[#7C5DFA] rounded-[26px] active:scale-90 transition-all "
+                                >
+                                    Mark as Paid
+                                </button>
+                            )}
                         </div>
                     </div>
                     <div className="p-[24px] animate-slide-down dark:bg-[#1E2139] shadow-md rounded-[8px] mt-[16px] mb-[56px]">
@@ -225,30 +253,37 @@ function InvoiceDetails() {
                     >
                         Delete
                     </button>
-                    <button className="hover:bg-[#9277FF] dark:hover:bg-[#9277FF] px-[27px] py-[17px] text-[12px] font-bold text-white bg-[#7C5DFA] rounded-[26px] active:scale-90 transition-all ">
-                        Mark as Paid
-                    </button>
+                    {voice.status === "pending" && (
+                        <button
+                            onClick={() => {
+                                handleMarkUp(voice.id);
+                            }}
+                            className="hover:bg-[#9277FF] dark:hover:bg-[#9277FF] px-[27px] py-[17px] text-[12px] font-bold text-white bg-[#7C5DFA] rounded-[26px] active:scale-90 transition-all "
+                        >
+                            Mark as Paid
+                        </button>
+                    )}
                 </div>
             </div>
             {dis === true && (
                 <div className="fixed inset-0 flex items-center justify-center px-3 transition-opacity bg-black bg-opacity-50 ">
                     <div
-                        className="max-w-[480px] w-full bg-white p-6 rounded-lg shadow-lg animate-slide-down"
+                        className="max-w-[480px] w-full bg-white dark:bg-[#1E2139] p-6 rounded-lg shadow-lg animate-slide-down"
                         id="animatedModal"
                     >
-                        <h1 className="mt-[48px] text-[#0C0E16] text-[24px] font-bold mb-[13px]">
+                        <h1 className="mt-[48px] text-[#0C0E16] text-[24px] font-bold mb-[13px] dark:text-white">
                             Confirm Deletion
                         </h1>
-                        <p className="text-[12px] text-[#888EB0]">
+                        <p className="text-[12px] text-[#888EB0] dark:text-[#888EB0]">
                             Are you sure you want to delete invoice #XM9141?
                             This action cannot be undone.
                         </p>
-                        <div className="flex justify-end gap-2 mt-[16px] mb:mb-[48px] mb-[32px]">
+                        <div className="flex justify-end gap-2 mt-[16px] mb:mb-[48px] mb-[32px] ">
                             <button
                                 onClick={() => {
                                     setDis(false);
                                 }}
-                                className="px-[23px] py-[17px] text-[12px] font-bold text-[#7E88C3] bg-[#F9FAFE] rounded-[26px] active:scale-90 transition-all"
+                                className="px-[23px] py-[17px] text-[12px] font-bold text-[#7E88C3] bg-[#F9FAFE] rounded-[26px] active:scale-90 transition-all dark:bg-[#252945] dar:text-[#DFE3FA]"
                             >
                                 Cancel
                             </button>

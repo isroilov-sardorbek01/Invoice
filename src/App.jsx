@@ -9,7 +9,9 @@ export const DataContext = createContext(null);
 
 function App() {
     const [theme, setTheme] = useState("light");
-    const [api, setApi] = useState([]);
+    const [api, setApi] = useState(
+        JSON.parse(localStorage.getItem("data")) || []
+    );
 
     useEffect(() => {
         const body = document.body;
