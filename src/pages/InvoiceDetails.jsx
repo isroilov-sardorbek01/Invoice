@@ -1,14 +1,16 @@
 import React, { useContext, useEffect, useState } from "react";
 import { NavLink, useNavigate, useParams } from "react-router-dom";
-import arrowImg from "../images/arowImg.svg";
 import { toast } from "react-toastify";
 import { DataContext } from "../App";
+import arrowImg from "../images/arowImg.svg";
+import EditInvoice from "../components/EditInvoice";
 
 function InvoiceDetails() {
     const { id } = useParams();
     const [voice, setVoice] = useState({});
     const [dis, setDis] = useState(false);
     const { api, setApi } = useContext(DataContext);
+    const [open, setOpen] = useState(false);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -108,7 +110,12 @@ function InvoiceDetails() {
                             </div>
                         </div>
                         <div className="items-center hidden md:flex gap-[10px]">
-                            <button className="px-[23px] py-[17px] text-[12px] font-bold text-[#7E88C3] bg-[#F9FAFE] rounded-[26px] active:scale-90 transition-all dark:bg-[#252945] dark:text-[#DFE3FA] hover:bg-[#DFE3FA] dark:hover:bg-white dark:hover:text-[#7E88C3]">
+                            <button
+                                onClick={() => {
+                                    setOpen(true);
+                                }}
+                                className="px-[23px] py-[17px] text-[12px] font-bold text-[#7E88C3] bg-[#F9FAFE] rounded-[26px] active:scale-90 transition-all dark:bg-[#252945] dark:text-[#DFE3FA] hover:bg-[#DFE3FA] dark:hover:bg-white dark:hover:text-[#7E88C3]"
+                            >
                                 Edit
                             </button>
                             <button
@@ -244,7 +251,12 @@ function InvoiceDetails() {
             </div>
             <div className="max-w-[780px] fixed bottom-0 w-[100%] mx-auto py-[21px] px-[24px] h-[91px] md:mb-[40px] shadow-lg  dark:bg-[#1E2139] bg-white md:hidden ">
                 <div className="flex items-center justify-between">
-                    <button className="px-[23px] py-[17px] text-[12px] font-bold text-[#7E88C3] bg-[#F9FAFE] rounded-[26px] active:scale-90 transition-all dark:bg-[#252945] dark:text-[#DFE3FA] hover:bg-[#DFE3FA] dark:hover:bg-white dark:hover:text-[#7E88C3]">
+                    <button
+                        onClick={() => {
+                            setOpen(true);
+                        }}
+                        className="px-[23px] py-[17px] text-[12px] font-bold text-[#7E88C3] bg-[#F9FAFE] rounded-[26px] active:scale-90 transition-all dark:bg-[#252945] dark:text-[#DFE3FA] hover:bg-[#DFE3FA] dark:hover:bg-white dark:hover:text-[#7E88C3]"
+                    >
                         Edit
                     </button>
                     <button
@@ -298,6 +310,15 @@ function InvoiceDetails() {
                         </div>
                     </div>
                 </div>
+            )}
+            {open && (
+                <EditInvoice
+                    id={id}
+                    open={open}
+                    onClose={() => {
+                        setOpen(false);
+                    }}
+                ></EditInvoice>
             )}
         </div>
     );

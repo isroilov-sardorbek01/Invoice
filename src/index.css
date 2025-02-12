@@ -26,3 +26,6 @@ body {
 .scrollbar-hide::-webkit-scrollbar{
     display: none;
 }
+.number::-webkit-inner-spin-button{
+    display: none;
+}

@@ -2,9 +2,9 @@ import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { DataContext } from "../App";
 import data from "../assets/data.json";
+import AddInvoice from "../components/AddInvoice";
 import btnImg from "../images/btnImg.svg";
 import novicesImg from "../images/novicesImg.svg";
-import AddInvoice from "../components/AddInvoice";
 
 export function Invoices() {
     const [sel, setSel] = useState("All");
@@ -12,6 +12,10 @@ export function Invoices() {
     const [open, setOpen] = useState(false);
     const { api, setApi } = useContext(DataContext);
     useEffect(() => {
+        if (!localStorage.getItem("theme")) {
+            localStorage.setItem("theme", "light");
+        }
+
         !JSON.parse(localStorage.getItem("data"))
             ? localStorage.setItem("data", JSON.stringify(data))
             : JSON.parse(localStorage.getItem("data"));

@@ -4,9 +4,11 @@ import light from "../images/ligthImg.svg";
 import dark from "../images/darkImg.svg";
 import heroImg from "../images/heroImg.svg";
 import { ThemeContext } from "../App";
+import { useNavigate } from "react-router-dom";
 
 function LayoutLeft() {
     const { theme, setTheme } = useContext(ThemeContext);
+    const navigate = useNavigate()
 
     function handleChangeTheme() {
         if (theme === "light") {
@@ -22,8 +24,8 @@ function LayoutLeft() {
         setTheme(prevTheme);
     }, []);
     return (
-        <div className="z-50 md:max-w-[1284px] md:h-[80px] flex items-center justify-between bg-[#373B53] dark:bg-[#1E2139] xl:flex-col xl:max-w-[103px] w-[100%] xl:h-dvh xl:rounded-tr-[29px] xl:rounded-br-[29px] xl:fixed xl:top-0 xl:left-0 xl:bottom-0 ">
-                <img draggable={false}
+        <div className="z-50 md:max-w-[1284px] md:h-[80px] flex items-center justify-between bg-[#373B53] dark:bg-[#1E2139] xl:flex-col xl:max-w-[103px] w-[100%] xl:h-dvh xl:rounded-tr-[29px] xl:rounded-br-[29px] xl:fixed xl:top-0 xl:left-0 xl:bottom-0 cursor-pointer">
+                <img onClick={() => {navigate('/')}} draggable={false}
                     src={image}
                     className="xl:max-w-[103px] w-[80px] xl:w-[100%] max-h-[103px] h-[100%] select-none"
                     alt=""
