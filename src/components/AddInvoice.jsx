@@ -4,7 +4,6 @@ import { DataContext } from "../App";
 import { generateId } from "../funksions";
 import delIcon from "../images/delIcon.svg";
 import { toast } from "react-toastify";
-import { NavLink } from "react-router-dom";
 import imgArr from "../images/arowImg.svg";
 
 function AddInvoice({ open, onClose }) {
@@ -13,7 +12,7 @@ function AddInvoice({ open, onClose }) {
         return null;
     }
     const [isClosing, setIsClosing] = useState(false);
-    const [allItems, setAllItems] = useState([]);
+    const [allItems, setAllItems] = useState([] );
     const navigate = useNavigate();
     useEffect(() => {
         if (open) {
@@ -138,8 +137,8 @@ function AddInvoice({ open, onClose }) {
         copied.push(FixedData);
         setApi(copied);
         localStorage.setItem("data", JSON.stringify(copied));
-        navigate("/");
         handleClose();
+        
     }
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
