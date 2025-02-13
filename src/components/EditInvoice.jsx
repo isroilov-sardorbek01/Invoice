@@ -459,20 +459,14 @@ function EditInvoice({ id, onClose }) {
                         onClick={handleClose}
                         className="px-[17px] py-[17px] text-[#7E88C3] text-[12px] font-bold"
                     >
-                        Discard
+                        Cancel
                     </button>
                     <div className="flex gap-[7px]">
-                        <button
-                            onClick={handleEdit}
-                            className="text-[#888EB0] font-bold text-[12px] px-[15px] py-[17px] bg-[#373B53] rounded-[24px]"
-                        >
-                            Save as Draft
-                        </button>
                         <button
                             onClick={handleSend}
                             className="text-white font-bold truncate hover:opacity-80 p-[16px] text-[12px] bg-[#7c5dfa] rounded-full"
                         >
-                            Save & Send
+                            Save & Changes
                         </button>
                     </div>
                 </div>
